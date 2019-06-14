@@ -9,4 +9,7 @@ public class AccountListController {
     public static DateTime fetchDate() {
         return [ SELECT Id, Name, Industry, Type, createddate FROM Account LIMIT 1].createddate;
     }
+	public static TestMethod(){
+	
+	}
 }
