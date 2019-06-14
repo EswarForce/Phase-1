@@ -1,0 +1,22 @@
+<aura:component controller="CarSearchServerSideController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" extends ="c:CarSearch" access="global" >
+	<!-- Attribute-->
+    <aura:attribute name="options" type="Car_Type__c[]"/>
+    <aura:attribute name="selectedValue" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <lightning:card title="Search Your Car">
+        <lightning:layout pullToBoundary="medium">
+             <lightning:layoutItem flexibility="auto" padding="horizontal-medium">
+                <lightning:select name="cartypeId" label="Select a Cartype:" aura:id="cartypeid" value="{!v.selectedValue}">
+                    <option text="All Types" value="All Types"/>
+                    <aura:iteration items="{!v.options}" var="option">
+                       <option text="{!option.Name}" value="{!option.id}"/>
+                    </aura:iteration>
+                </lightning:select>
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" padding="horizontal-medium">
+              <lightning:button variant="brand" label="Search" title="Search" onclick="{!c.Search }" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>

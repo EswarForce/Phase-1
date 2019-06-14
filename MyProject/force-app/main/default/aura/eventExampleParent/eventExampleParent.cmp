@@ -1,0 +1,3 @@
+<aura:component >
+	 <aura:handler name="cmpevent" event="c:eventExample" action="{!c.handleComponentEvent}"/>
+</aura:component>

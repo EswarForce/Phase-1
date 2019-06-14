@@ -1,0 +1,52 @@
+<aura:component implements="force:appHostable"
+                controller="OpportunitySearchController">
+    
+ <aura:attribute name="oppty" 
+                    type="Opportunity" 
+                    default="{ 'sobjectType': 'Opportunity'}"/>
+ <aura:attribute name="columns" type="List"/>    
+ <aura:attribute name="opportunityList" type="Opportunity[]"/>
+ <aura:attribute name="PaginationList" type="Opportunity[]"/>
+ <aura:attribute name="startPage" type="Integer" />
+ <aura:attribute name="endPage" type="Integer"/>
+ <aura:attribute name="totalRecords" type="Integer"/>
+ <aura:attribute name="pageSize" type="Integer" default="3"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+ <div class="slds-box slds-theme_default">
+        <div class="slds-grid slds-grid_vertical">
+            <div class="slds-col">
+                Close Date<force:inputField value="{!v.oppty.CloseDate}"/>
+            </div>
+            <div class="slds-col">
+                Amount<force:inputField value="{!v.oppty.Amount}"/>
+            </div>  
+            <div class="slds-col">
+                <lightning:button label="Search" onclick="{!c.searchOppty}"/>
+            </div>              
+        </div>
+    </div>
+    
+    <aura:if isTrue="true">
+        <div class="slds-grid slds-grid_vertical">
+            <lightning:datatable data="{!v.PaginationList}"
+                                 columns="{!v.columns}" 
+                                 keyField="id"
+                                 hideCheckboxColumn="true"/>
+            <lightning:buttonGroup>
+                <lightning:button label="Previous" 
+                                  disabled="{!v.startPage == 0}"  
+                                  onclick="{!c.previous}" 
+                                  variant="brand"
+                                  iconName='utility:back'/>
+                <lightning:button label="Next" 
+                                  disabled="{!v.endPage + 1 >= v.totalRecords}" 
+                                  onclick="{!c.next}" 
+                                  variant="brand"
+                                  iconName='utility:forward'/>
+            </lightning:buttonGroup>
+        </div>
+    </aura:if>
+    
+</aura:component>
